@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="header">
+        <div class="flex-row header-row">
+            <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+            <div style="flex: 1;"></div>
+            <h4>CMS Admin Name</h4>
+            <button class="profile-menu-toggle" type="button" (click)="menu.toggle($event)" style="font-size: 8pt;">{{isMenuShow ? '▲' : '▼'}}</button>
+            <p-menu #menu (onShow)="isMenuShow = true" (onHide)="isMenuShow = false" [model]="profileItems" [popup]="true"></p-menu>
+        </div>
+    </div>
+    
+    <div class="flex-row">
+        <div style="flex: 1;" class="flex-column">
+            <a class="back-button" href="/">< Back</a>
+            <h2 class="title">App Account</h2>
+            <div *ngFor="let masterheadImage of masterheadImages; let i = index">
+                <div *ngIf="masterheadImage.isCurrent">
+                    <h4>Current Masterhead</h4>
+                    <image-dropzone width="150px" height="130px" [(imageUrl)]="masterheadImage.imageUrl" (imageUrlChange)="onUpdate(masterheadImage)"></image-dropzone>
+                </div>
+    
+                <div *ngIf="!masterheadImage.isCurrent">
+                    <h4>Upcoming Masterhead</h4>
+                    <div class="flex-row" style="align-items: flex-end;">
+                        <image-dropzone height="80px" [(imageUrl)]="masterheadImage.imageUrl"></image-dropzone>
+                        <div class="flex-column" style="margin-left: 8px;">
+                            <b>PUBLISH DATE/TIME</b>
+                            <mat-form-field appearance="fill">
+                                <input placeholder="Choose a date" matInput [matDatepicker]="picker" [(ngModel)]="masterheadImage.publishDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <input type="text" pInputText style="padding: 8px; margin-left: 8px;" placeholder="00:00" [(ngModel)]="masterheadImage.publishTime"/>
+                        <button type="submit" class="save-button" [disabled]="(masterheadImage.imageUrl == null || masterheadImage.imageUrl == '') || masterheadImage.publishDate == null || masterheadImage.publishDate == '' || masterheadImage.publishTime == null || masterheadImage.publishTime == '' " (click)="onSave(masterheadImage)">Save</button>
+                    </div>
+                </div>
+                <br>
+            </div>
+
+
+        </div>
+        <div style="width: 300px;">
+        </div>
+    </div>
+</div>

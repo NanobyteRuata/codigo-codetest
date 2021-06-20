@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="header">
+        <div class="flex-row header-row">
+            <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+            <div style="flex: 1;"></div>
+            <h4>CMS Admin Name</h4>
+            <button class="profile-menu-toggle" type="button" (click)="menu.toggle($event)" style="font-size: 8pt;">{{isMenuShow ? '▲' : '▼'}}</button>
+            <p-menu #menu (onShow)="isMenuShow = true" (onHide)="isMenuShow = false" [model]="profileItems" [popup]="true"></p-menu>
+        </div>
+    </div>
+    
+    <div class="flex-row">
+        <form *ngIf="aboutRwsInvitesFg" #aboutRwsInvitesForm style="flex: 1;" class="flex-column" [formGroup]="aboutRwsInvitesFg" (ngSubmit)="onSubmit()">
+            <a class="back-button" href="/">< Back</a>
+            <h2 class="title">About RWS Invites</h2>
+
+            <h4>1. MEDIA FILES</h4>
+            <div class="flex-column input-group-vertical">
+                <b>YOUTUBE LINK</b>
+                <div class="flex-row" style="align-items: center;">
+                    <input type="text" pInputText formControlName="youtubeLink" />
+                    <span style="margin-left: 8px;">OR</span>
+                </div>
+                <div class="flex-row" style="margin-top: 4px;">
+                    <image-dropzone style="margin-right: 4px;" height="80px" formControlName="media1Url"></image-dropzone>
+                    <image-dropzone style="margin-right: 4px;" height="80px" formControlName="media2Url"></image-dropzone>
+                    <image-dropzone style="margin-right: 4px;" height="80px" formControlName="media3Url"></image-dropzone>
+                    <image-dropzone style="margin-right: 4px;" height="80px" formControlName="media4Url"></image-dropzone>
+                    <image-dropzone style="margin-right: 4px;" height="80px" formControlName="media5Url"></image-dropzone>
+                </div>
+            </div>
+
+            <br>
+
+            <h4 class="small-title">1. HEADLINE</h4>
+            <div class="flex-column input-group-vertical">
+                <custom-input-field label='ENG' labelMinWidth="70px" rows='1' maxLength="72" formControlName="headlineEng"></custom-input-field>
+                <custom-input-field label='SC' labelMinWidth="70px" rows='1' maxLength="72" formControlName="headlineSc"></custom-input-field>
+                <custom-input-field label='ID' labelMinWidth="70px" rows='1' maxLength="72" formControlName="headlineId"></custom-input-field>
+            </div>
+
+            <br>
+
+            <h4 class="small-title">2. SHORT DESCRIPTION</h4>
+            <div class="flex-column input-group-vertical">
+                <custom-input-field label='ENG' labelMinWidth="70px" rows='2' maxLength="160" formControlName="shortDescriptionEng"></custom-input-field>
+                <custom-input-field label='SC' labelMinWidth="70px" rows='2' maxLength="160" formControlName="shortDescriptionEng"></custom-input-field>
+                <custom-input-field label='ID' labelMinWidth="70px" rows='2' maxLength="160" formControlName="shortDescriptionEng"></custom-input-field>
+            </div>
+
+            <br>
+
+            <h4 class="small-title">3. FEATURES</h4>
+            <div formArrayName="features" *ngFor="let featureFg of aboutRwsInvitesFg.get('features')['value']['controls']; let i = index" class="feature-container input-group-vertical">
+                <ng-container [formGroup]="featureFg">
+                    <div class="flex-column" >
+                        <h4 class="small-title">UPLOAD ICON</h4>
+                        <image-dropzone formControlName="iconUrl"></image-dropzone>
+                    </div>
+                    <div style="flex:1" class="flex-column input-group-vertical">
+                        <h4 class="small-title">TITLE</h4>
+                        <custom-input-field label='ENG' labelMinWidth="70px" rows='1' maxLength="20" formControlName="titleEng"></custom-input-field>
+                        <custom-input-field label='SC' labelMinWidth="70px" rows='1' maxLength="20" formControlName="titleSc"></custom-input-field>
+                        <custom-input-field label='ID' labelMinWidth="70px" rows='1' maxLength="20" formControlName="titleId"></custom-input-field>
+                        <br>
+                        <h4 class="small-title">DESCRIPTION</h4>
+                        <custom-input-field label='ENG' labelMinWidth="70px" rows='3' formControlName="descriptionEng"></custom-input-field>
+                        <custom-input-field label='SC' labelMinWidth="70px" rows='3' formControlName="descriptionSc"></custom-input-field>
+                        <custom-input-field label='ID' labelMinWidth="70px" rows='3' formControlName="descriptionId"></custom-input-field>
+                        <a style="align-self: flex-end; text-decoration: underline; cursor: pointer;" (click)="removeFeature(i)">Remove</a>
+                    </div>
+                </ng-container>
+            </div>
+        
+            <br>
+            <button class="feature-add-button" (click)="addNewFeature()">Add Another</button>
+
+            <br>
+
+            <h4 class="small-title">4. FIND OUT MORE</h4>
+            <div class="flex-column input-group-vertical">
+                <h4 class="small-title">ENG</h4>
+                <p-editor [style]="{'height':'320px'}" formControlName="findOutMoreEng"></p-editor>
+                <h4 class="small-title">SC</h4>
+                <p-editor [style]="{'height':'320px'}" formControlName="findOutMoreSc"></p-editor>
+                <h4 class="small-title">ID</h4>
+                <p-editor [style]="{'height':'320px'}" formControlName="findOutMoreId"></p-editor>
+            </div>
+
+            <br>
+
+            <h4 class="small-title">5. CTA</h4>
+            <div class="flex-column">
+                <custom-input-field label='ENG' labelMinWidth="70px" rows='1' maxLength="25" formControlName="ctaEng"></custom-input-field>
+                <custom-input-field label='SC' labelMinWidth="70px" rows='1' maxLength="25" formControlName="ctaSc"></custom-input-field>
+                <custom-input-field label='ID' labelMinWidth="70px" rows='1' maxLength="25" formControlName="ctaId"></custom-input-field>
+            </div>
+
+            <br>
+
+            <button type="submit" class="save-button">Save</button>
+
+        </form>
+        <div style="width: 300px;">
+            <div style="border: solid 1px grey; width: 100%; height: 600px; margin: 8px;"></div>
+        </div>
+    </div>
+</div>

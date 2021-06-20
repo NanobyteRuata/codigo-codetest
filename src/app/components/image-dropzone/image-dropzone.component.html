@@ -1,0 +1,15 @@
+<div>
+    <div *ngIf="isImageLoading" [ngStyle]="{width:width,height:height}" style="display: flex; align-items: center; justify-content: center;">
+        <i class="pi pi-spin pi-spinner"></i>
+    </div>
+    <div *ngIf="(imageUrl == null || imageUrl == '') && !isImageLoading" class="dropzone" [ngStyle]="{width:width,height:height, cursor: fileOver ? 'pointer' : 'default'}" dropzone (fileDropped)="onFileDropped($event)">
+        <span>Drag files here or</span>
+        <div class="fileupload">
+            <input type="file" (change)="onFileUpload($event)"/>
+            browse
+          </div>
+    </div>
+    <div *ngIf="!(imageUrl == null || imageUrl == '') && !isImageLoading" class="image" [ngStyle]="{width:width,height:height, 'background-image': 'url('+imageUrl+')'}">
+        <a class="remove-image-button" (click)="onRemoveImage()"><i class="pi pi-trash"></i></a>
+    </div>
+</div>

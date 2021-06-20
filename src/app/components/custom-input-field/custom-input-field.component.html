@@ -1,0 +1,5 @@
+<div class="flex-row" style="margin-bottom: 4px; position: relative;">
+    <b [ngStyle]="{'margin-right': '8px', 'min-width': labelMinWidth ? '30px' : labelMinWidth, 'margin': '12px'}">{{label}}</b>
+    <textarea [disabled]="disabled" style="flex: 1; padding: 12px;" [placeholder]="placeholder" [maxlength]="maxLength" [rows]="rows" pInputTextarea [autoResize]="autoResize" [(ngModel)]='value' (ngModelChange)="onChange(value)"></textarea>
+    <span *ngIf="maxLength" style="position: absolute; right: 8px; bottom: 8px; opacity: 0.5; font-size: 10pt;">{{value.length}}/{{maxLength}}</span>
+</div>

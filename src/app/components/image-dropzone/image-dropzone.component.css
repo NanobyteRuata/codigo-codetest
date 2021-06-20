@@ -1,0 +1,59 @@
+.dropzone {
+    border: dashed 1px gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: .1s ease;
+}
+.dropzone span {
+    color: gray;
+    text-align: center;
+}
+.dropzone a {
+    color: blue !important;
+    text-decoration: underline;
+}
+
+.image {
+    background-position: center center; 
+    background-size: contain;
+    border: solid .5px gray;
+    border-radius: 4px;
+    position: relative;
+}
+
+.remove-image-button {
+    position: absolute;
+    cursor: pointer;
+    top: 4px;
+    right: 4px;
+    text-decoration: none; 
+    color: red; 
+    width: 20px;
+    height: 20px;
+}
+
+.fileupload {
+    text-align: center;
+    width: 100px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+    color: blue;
+    text-decoration: underline;
+}
+
+.fileupload input {
+    position: absolute;
+    top: 0;
+    right: 0; /* not left, because only the right part of the input seems to
+                 be clickable in some browser I can't remember */
+    cursor: pointer;
+    opacity: 0.0;
+    filter: alpha(opacity=0); /* and all the other old opacity stuff you
+                                 want to support */
+    font-size: 300px; /* wtf, but apparently the most reliable way to make
+                         a large part of the input clickable in most browsers */
+    height: 200px;
+}

@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<div class="flex-row">
+    <div>
+        <p-panelMenu [model]="panelItems" [style]="{'width':'300px'}"></p-panelMenu>
+    </div>
+    <div style="flex: 1" class="flex-column">
+        <router-outlet></router-outlet>
+    </div>
+</div>
