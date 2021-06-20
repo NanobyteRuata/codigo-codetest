@@ -2,6 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.0.
 
+## Please run json-server for this app to work
+
+[Json-server documentation](https://www.npmjs.com/package/json-server)
+Run `json-server --watch db.json` for a mock API server. The angular app needs this to run properly
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
